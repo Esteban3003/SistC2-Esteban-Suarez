@@ -28,7 +28,7 @@ polo1 = poles(1);
 polo2 = poles(2);
 % Tamaño de paso y tiempo de simulación
 tR   = log(0.95)/real(poles(1));    % dinámica rápida (para este caso iguales dinámicas)
-tint = tR/100;                 % tiempo de integración (10 veces menor)
+tint = tR/100;                 % tiempo de integración (100 veces menor)
 tsim = 30e-3;                 % no se escoje en función de la dinámica 
                               % lenta del sistema dado que el t_est << que 
                               % el tiempo de cambio de la entrada
