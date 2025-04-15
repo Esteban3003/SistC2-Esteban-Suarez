@@ -29,7 +29,7 @@ polo2 = poles(2);
 
 % Tamaño de paso y tiempo de simulación
 tR   = log(0.95)/real(poles(1));    % dinámica rápida (para este caso iguales dinámicas)
-tint = tR/100;                 % tiempo de integración (100 veces menor)
+tint = tR/100;                      % tiempo de integración (100 veces menor)
 tsim = 30e-3;                 
 
 puntos = tsim/tint;
