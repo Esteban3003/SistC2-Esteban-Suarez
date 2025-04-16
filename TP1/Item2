@@ -104,9 +104,6 @@ T3_v = 0;
 
 % D) Definición de la función de transferencia obtenida con el método
 G_v = tf(K_v*[T3_v 1],conv([T1_v 1],[T2_v 1]));
-polos=pole(G_v);
-polo1=polos(1);
-polo2=polos(2);
 
 % E) Gráfica de los resultado obtenidos
 % Se compara la señal dada por los datos de la hoja de excel con la
