@@ -41,7 +41,7 @@ plot(tt, TL_, 'b'); title('Torque [N.m]'); grid on; hold on;
 tint = 1e-7; 
 tF   = 1.5;
 Ts   = tint;
-V    = 12;
+V    = 2;
 t    = 0:Ts:tF;                         % vector de tiempo para gráfica 
 um   = zeros(1, length(t));             % vector de acción sobre el motor
 
