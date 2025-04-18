@@ -1,1 +1,75 @@
+% Sistemas de Control II -FCEFyN-UNC 
+% Profesor: Dr. Ing. Pucheta, Julian
+% Alumno: Suarez, Esteban Samuel
+% Actividad Práctica N1 - Caso de estudio 2
+%   Inciso 5
+%   A partir de las curvas de mediciones de las variables graficadas en la Fig. 1-3, se requiere 
+%   obtener el modelo del sistema considerando como entrada un escalón de 12V, como salida 
+%   a la velocidad angular y como perturbación al toque TL aplicado. En el archivo 
+%   Curvas_Medidas_Motor.xls están las mediciones, en la primer hoja
+%   los valores y en la segunda los nombres. Se requiere obtener el modelo dinámico, para 
+%   establecer las constantes de la corriente.
+%%
+clear all;
+%% 
+% LECTURA DE DATOS
+values = xlsread('Curvas_Medidas_Motor_2025_v.xls');
 
+tt     = values(1:end,1);       % tiempo
+W      = values(1:end,2);       % velocidad angular
+Ia     = values(1:end,3);       % corriente de armadura
+Vin    = values(1:end,4);       % tensión de entrada aplicada al motor 
+TL_    = values(1:end,5);       % torque de carga
+
+% Gráficas de señales obtenidas de la plantilla
+figure(1)
+% Velocidad angular 
+subplot(4,1,1);hold on
+plot(tt, W, 'b'); title('Velocidad angular , \omega[rad/seg]'); grid on;hold on;
+% Tensión de excitación de entrada
+subplot(4,1,2)
+plot(tt, Vin, 'b'); title('Tensión,[V]'); grid on; hold on;
+% Corriente de armadura
+subplot(4,1,3)
+plot(tt, Ia, 'b'); title('Corriente, I_a[A]'); grid on; hold on;
+% Torque
+subplot(4,1,4)
+plot(tt, TL_, 'b'); title('Torque [N.m]'); grid on; hold on;
+
+%%
+% PARÁMETROS DE SIMULACIÓN
+tint = 1e-7; 
+tF   = 1.5;
+Ts   = tint;
+V    = 12;
+t    = 0:Ts:tF;                         % vector de tiempo para gráfica 
+um   = zeros(1, length(t));             % vector de acción sobre el motor
+
+%%
+% Defino el valor de tiempo a partir del cual hay tensión de alimentación
+t_init_V = 0.101;
+
+% Defino el intervalo de tiempo durante el cual existe torque
+t_init_Tor = 0.701;
+t_fin_Tor = 1;
+
+% se genera el vector de torque y el vector de tensión de alimentación
+TLref    = 0.12;
+TL       = zeros(1, length(t));
+for i=1:tF/Ts
+    t_ = t(i);
+    if(t_>=t_init_V)
+        um(i) = V;
+    end
+    if ((t_init_Tor<=t_) && (t_<=t_fin_Tor))
+        TL(i) = TLref;
+    else
+        TL(i) = 0;
+    end
+end
+
+figure(2)
+subplot(2,1,1);
+plot(t, um); grid; hold on;
+subplot(2,1,2);
+plot(t, TL); grid; hold on;
