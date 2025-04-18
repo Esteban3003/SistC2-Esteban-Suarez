@@ -52,8 +52,8 @@ ii  = 0;
 % t2_v = values(1150,1); y2_v = values(1150,3);
 % t3_v = values(1250,1); y3_v = values(1250,3);
 ret     =       0.01;
-t1       =       1e-4;
-[val lugar] =min(abs(t1+ret-values(:,1)));%Busco en ret+t1
+t1      =       1e-4;
+[val lugar] =min(abs(t1+ret-values(:,1))); % Busco en ret+t1
 y1_v=values(lugar,3);
 t1_v=values(lugar,1);
 [val lugar1] =min(abs(2*t1+ret-values(:,1)));
@@ -92,9 +92,9 @@ k3_v = (y3_v/K_v) - 1;
 
 % B) Se despejan los valores de alfa1, alfa2 y beta
 b_v     = 4*(k1_v^3)*k3_v - 3*(k1_v^2)*(k2_v^2) - 4*(k2_v^3) + (k3_v^2) + 6*k1_v*k2_v*k3_v; %Utilizando ecuacion 23 de Chen
-alfa1_v = (k1_v*k2_v + k3_v - sqrt(b_v))/(2*(k1_v^2 + k2_v)); %Utilizando ecuacion 21 de Chen
-alfa2_v = (k1_v*k2_v + k3_v + sqrt(b_v))/(2*(k1_v^2 + k2_v)); %Utilizando ecuacion 22 de Chen
-beta_v  = (k1_v+alfa2_v)/(alfa1_v-alfa2_v);                   %Utilizando ecuacion 24 de Chen
+alfa1_v = (k1_v*k2_v + k3_v - sqrt(b_v))/(2*(k1_v^2 + k2_v)); % Utilizando ecuacion 21 de Chen
+alfa2_v = (k1_v*k2_v + k3_v + sqrt(b_v))/(2*(k1_v^2 + k2_v)); % Utilizando ecuacion 22 de Chen
+beta_v  = (k1_v+alfa2_v)/(alfa1_v-alfa2_v);                   % Utilizando ecuacion 24 de Chen
 
 % C) Cálculo de las constantes de tiempo de la FT
 T1_v = -(t1_v - 0.01)/log(alfa1_v);   %Ecuacion de Chen 25          
@@ -117,18 +117,16 @@ plot(time,vcSignal, 'k' ); grid on; hold on;
 plot(t_G_v,y_G_v,'r'); title('Respuesta al sistema aplicando Metodo de Chen vs. Señal graficada de la tabla de datos');
 legend({'Vc_t de excel','Puntos','Vc_t método de Chen'},'Location','northeast')
 
-%ITEM 3  Acá debes obtener la constante C
-% MÉTODO DE CHEN NO. Acá no. En clase hemos detallado el método a partir de
-% Vc.
+%ITEM 3  Acá debemos obtener la constante C
 % G(s) = C*Vc(s)/U(s)
 % Para obtener C, dVc/dt=(1/C)*i
-AVc=values(lugar2,3)-values(lugar2-1,3);
-At=t3_v-values(lugar2-1,1);
-i_t3=values(lugar2,2);
-C=At*i_t3/AVc;
-% [val lugar2] =min(abs(3*t1+ret-values(:,1)));
-% y3_v=values(lugar2,3);
-% t3_v=values(lugar2,1);
+AVc  = values(lugar2,3)-values(lugar2-1,3);
+At   = t3_v-values(lugar2-1,1);
+i_t3 = values(lugar2,2);
+C    = At*i_t3/AVc;
+% [val lugar2] = min(abs(3*t1+ret-values(:,1)));
+% y3_v = values(lugar2,3);
+% t3_v = values(lugar2,1);
 
 % D) Definición de la función de transferencia derivando a la tensión y
 % multiplicando por C
