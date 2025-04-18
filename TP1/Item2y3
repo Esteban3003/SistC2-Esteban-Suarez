@@ -120,10 +120,10 @@ legend({'Vc_t de excel','Puntos','Vc_t método de Chen'},'Location','northeast')
 %ITEM 3  Acá debemos obtener la constante C
 % G(s) = C*Vc(s)/U(s)
 % Para obtener C, dVc/dt=(1/C)*i
-AVc  = values(lugar2,3)-values(lugar2-1,3);
-At   = t3_v-values(lugar2-1,1);
-i_t3 = values(lugar2,2);
-C    = At*i_t3/AVc;
+AVc  = values(lugar2,3)-values(lugar2-1,3); %Obtengo la variación de Vc
+At   = t3_v-values(lugar2-1,1); %Obtengo la variación de t
+i_t3 = values(lugar2,2); %Obtengo la corriente en el instante final
+C    = At*i_t3/AVc; %Calculo C
 % [val lugar2] = min(abs(3*t1+ret-values(:,1)));
 % y3_v = values(lugar2,3);
 % t3_v = values(lugar2,1);
