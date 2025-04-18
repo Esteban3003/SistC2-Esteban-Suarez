@@ -132,6 +132,10 @@ C    = At*i_t3/AVc; %Calculo C
 % multiplicando por C
 G_i = tf((C)*K_v*[1 0],conv([T1_v 1],[T2_v 1]));
 
+% Calculo R y L
+L   = (G_i.den{1}(1))/C;
+R   = (G_i.den{1}(2))/C;
+
 % 5) Gráfica de los resultado obtenidos
 % Se compara la señal dada por los datos de la hoja de cálculo con la
 % salida del sistema al hacer uso de la FT obtenida con el método de Chen
