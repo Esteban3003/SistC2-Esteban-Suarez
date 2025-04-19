@@ -3,7 +3,7 @@
 % Alumno: Suarez, Esteban Samuel
 % Actividad Práctica N1 - Caso de estudio 1
 %   Item 2  
-%   En el archivo Curvas_Medidas_RLC_2025.xls (datos en la hoja 1 y etiquetas en la hoja
+%   En el archivo Curvas_Medidas_RLC_2025_v.xls (datos en la hoja 1 y etiquetas en la hoja
 %   2) están las series de datos que sirven para deducir los valores de R, L y C del circuito. Emplear
 %   el método de la respuesta al escalón, tomando como salida la tensión en
 %   el capacitor.
