@@ -12,8 +12,6 @@
 %   Una vez determinados los parámetros R, L y C, emplear la serie de corriente desde 
 %   0.05seg en adelante para validar el resultado superponiendo las gráficas.
 
-
-
 clear all; close all; clc; 
 
 % Lectura de datos 
@@ -62,8 +60,6 @@ t2_v=values(lugar1,1);
 [val lugar2] =min(abs(3*t1+ret-values(:,1)));
 y3_v=values(lugar2,3);
 t3_v=values(lugar2,1);
-
-
 
 % figure(3)
 figure(1)
