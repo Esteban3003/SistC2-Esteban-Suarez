@@ -24,8 +24,6 @@ D=[0];                    % matriz de transmision directa
 G = tf(numG, denG);
 % Polos de la FT
 poles = roots(denG);
-polo1 = poles(1);
-polo2 = poles(2);
 
 % Tamaño de paso y tiempo de simulación
 tR   = log(0.95)/real(poles(1));    % dinámica rápida (para este caso iguales dinámicas)
