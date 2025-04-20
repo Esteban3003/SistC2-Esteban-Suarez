@@ -10,7 +10,7 @@
 %   los valores y en la segunda los nombres. Se requiere obtener el modelo dinámico, para 
 %   establecer las constantes de la corriente.
 %%
-clear all;
+clear all; clc; close all;
 %% 
 % LECTURA DE DATOS
 values = xlsread('Curvas_Medidas_Motor_2025_v.xls');
