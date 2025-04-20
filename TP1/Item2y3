@@ -46,9 +46,6 @@ ii  = 0;
 % las condiciones del método (ver artículo)
 
 % 1) Elección de valores sobre el plot de Vc
-% t1_v = values(1050,1); y1_v = values(1050,3); 
-% t2_v = values(1150,1); y2_v = values(1150,3);
-% t3_v = values(1250,1); y3_v = values(1250,3);
 ret     =       0.01;
 t1      =       1e-4;
 [val lugar] =min(abs(t1+ret-values(:,1))); % Busco en ret+t1
@@ -93,8 +90,9 @@ alfa2_v = (k1_v*k2_v + k3_v + sqrt(b_v))/(2*(k1_v^2 + k2_v)); % Utilizando ecuac
 beta_v  = (k1_v+alfa2_v)/(alfa1_v-alfa2_v);                   % Utilizando ecuacion 24 de Chen
 
 % C) Cálculo de las constantes de tiempo de la FT
-T1_v = -(t1_v - 0.01)/log(alfa1_v);   %Ecuacion de Chen 25          
-T2_v = -(t1_v - 0.01)/log(alfa2_v);   %Ecuacion de Chen 25       
+ret = 0.01;
+T1_v = -(t1_v - ret)/log(alfa1_v);   %Ecuacion de Chen 25          
+T2_v = -(t1_v - ret)/log(alfa2_v);   %Ecuacion de Chen 25       
 T3_v = 0 ;                            %Ecuacion de Chen 25 
 
 % D) Definición de la función de transferencia obtenida con el método
@@ -113,16 +111,13 @@ plot(time,vcSignal, 'k' ); grid on; hold on;
 plot(t_G_v,y_G_v,'r'); title('Respuesta al sistema aplicando Metodo de Chen vs. Señal graficada de la tabla de datos');
 legend({'Vc_t de excel','Puntos','Vc_t método de Chen'},'Location','northeast')
 
-%ITEM 3  Acá debemos obtener la constante C
+% ITEM 3  Acá debemos obtener la constante C
 % G(s) = C*Vc(s)/U(s)
 % Para obtener C, dVc/dt=(1/C)*i
-AVc  = values(lugar2,3)-values(lugar2-1,3); %Obtengo la variación de Vc
-At   = t3_v-values(lugar2-1,1); %Obtengo la variación de t
-i_t3 = values(lugar2,2); %Obtengo la corriente en el instante final
-C    = At*i_t3/AVc; %Calculo C
-% [val lugar2] = min(abs(3*t1+ret-values(:,1)));
-% y3_v = values(lugar2,3);
-% t3_v = values(lugar2,1);
+AVc  = values(lugar2,3)-values(lugar2-1,3); % Obtengo la variación de Vc
+At   = t3_v-values(lugar2-1,1);             % Obtengo la variación de t
+i_t3 = values(lugar2,2);                    % Obtengo la corriente en el instante final
+C    = At*i_t3/AVc;                         % Calculo C
 
 % D) Definición de la función de transferencia derivando a la tensión y
 % multiplicando por C
