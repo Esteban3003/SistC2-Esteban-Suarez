@@ -9,7 +9,7 @@
 %   el inciso 5
 
 %%
-clc;clear;close all;
+clc; clear all; close all;
 %%
 
 % Asignación de valores para los parámetros
