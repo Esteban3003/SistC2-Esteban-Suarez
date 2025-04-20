@@ -79,7 +79,7 @@ plot(t, TL); grid; hold on;
 % 1) Elección de valores sobre el plot de Wr
 ret = 0.101;
 t1 = 0.001;
-[val lugar] =min(abs(t1+ret-values(:,1))); %Busco en ret+t1
+[val lugar] =min(abs(t1+ret-values(:,1))); % Busco en ret+t1
 y1w=values(lugar,2);
 t1w=values(lugar,1);
 [val lugar1] =min(abs(2*t1+ret-values(:,1)));
@@ -93,7 +93,7 @@ figure(3)
 plot([t1w t2w t3w],[y1w, y2w, y3w],'+');hold on;
 
 % 2) Cálculo de ganancia en estado estacionario
-Kw = values(1500,2)/2;     % ganancia en ess
+Kw = values(1500,2)/V;     % ganancia en ess
 
 % 3) Normalización de valores de la señal
 % Se dividen los valores obtenidos del gráfico por el valor de la entrada
@@ -155,13 +155,13 @@ figure(5)
 plot([t1ia t2ia t3ia],[y1ia, y2ia, y3ia],'+');hold on;
 
 % 2) Cálculo de ganancia en estado estacionario
-K_ia = values(1500,3)/2;     % ganancia en ess
+K_ia = values(1500,3)/V;     % ganancia en ess
 
 % 3) Normalización de valores de la señal
 % Se dividen los valores obtenidos del gráfico por el valor de la entrada
 % dado que con el método se busca la respuesta del sistema a una entrada
 % escalón unitario
-y1ia = y1ia/2; y2ia = y2ia/2; y3ia = y3ia/2;
+y1ia = y1ia/V; y2ia = y2ia/V; y3ia = y3ia/V;
 
 % 4) Aplicación del método
 % 4.a) Se define ki = y(ti)/K - 1 para cada ecuación resultante de los 3
@@ -179,7 +179,7 @@ betaia  = (k1ia + alfa2ia)/(alfa1ia - alfa2ia);                   % Chen ec.20
 % 4.c) Cálculo de las constantes de tiempo de la FT
 T1ia = -(t1ia - ret)/log(alfa1ia);     % Chen ec.25         
 T2ia = -(t1ia - ret)/log(alfa2ia);     % Chen ec.25         
-T3ia =(betaia*(T1ia - T2ia)) + T1ia;   % Chen ec.25
+T3ia = (betaia*(T1ia - T2ia)) + T1ia;   % Chen ec.25
 
 % 4.4) Definición de la función de transferencia obtenida con el método
 G_ia = tf(K_ia*[T3ia 1],conv([T1ia 1],[T2ia 1]));
