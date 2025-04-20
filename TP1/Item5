@@ -128,7 +128,7 @@ Gw = tf(Kw*[T3w 1],conv([T1w 1],[T2w 1]))
 % 5) Gráfica de los resultado obtenidos
 % Se compara la señal dada por los datos de la hoja de excel con la
 % salida del sistema al hacer uso de la FT obtenida con el método de Chen
-[y_Gw,t_Gw] = lsim(Gw,um-9*TL,t);
+[y_Gw,t_Gw] = lsim(Gw,um,t);
 figure(4)
 plot(tt, W, 'k' ); grid on; hold on;
 plot(t_Gw, y_Gw,'r'); title('Respuesta al sistema aplicando Metodo de Chen vs. Señal graficada de la tabla de datos');   %consultar al profe porque la diferencia tan brusca 
