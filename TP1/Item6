@@ -74,7 +74,6 @@ for i=1:tF/Ts
 end
 
 e = zeros(1,length(t));         % vector de error
-%u = zeros(1,length(t));         % vector acción de control PID
 u = 0;
 %%
 % PID discreto
