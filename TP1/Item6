@@ -9,16 +9,16 @@
 %   el inciso 5
 
 %%
-clc; clear all; close all;
+clc;clear;close all;
 %%
 
 % Asignación de valores para los parámetros
-Ki = 3.8093;
-Jm = 0.0418;
-Bm = 0.0210;
-La = 0.0049;
-Ra = 2.2581;
-Km = 0.2500;
+Ki = 0.2804;
+Jm = 0.0031;
+Bm = 0;
+La = 0.0217;
+Ra = 2.4390;
+Km = 0.2623;
 
 %%
 % MODELADO DEL MOTOR EN EL ESPACIO DE ESTADOS
@@ -81,9 +81,8 @@ u = 0;
 % u(i+1) = u(i) + A*e(i) + B*e(i-1) + C*e(i-2)
 
 % Parámetros PID
-Kp = 5;
-Ki = 0.5;
-Kd = 0.1;
+% Kp = 0.1; Ki = 0.01; Kd = 5;
+Kp = 5; Ki = 8; Kd = 1.5;
 
 A  = ((2*Kp*Ts)+(Ki*(Ts^2))+(2*Kd))/(2*Ts); 
 B  = (-2*Kp*Ts+Ki*(Ts^2)-4*Kd)/(2*Ts); 
