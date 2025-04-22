@@ -37,13 +37,11 @@ subplot(4,1,4)
 plot(tt, TL_, 'b'); title('Torque [N.m]'); grid on; hold on;
 
 % PARÁMETROS DE SIMULACIÓN
-% tint = 1e-7; 
 tF   = 1.5;
 V    = 2;
 
 % Defino el valor de tiempo a partir del cual hay tensión de alimentación
 t_init_V = 0.101;
-
 
 % MÉTODO DE CHEN
 % G(s) = wr(s)/U(s)
@@ -52,13 +50,13 @@ t_init_V = 0.101;
 ret = 0.101;
 t1 = 0.04;
 [val lugar] =min(abs(t1+ret-values(:,1))); % Busco en ret+t1
-y1wr=values(lugar,2)
+y1wr=values(lugar,2);
 t1wr=values(lugar,1);
 [val lugar1] =min(abs(2*t1+ret-values(:,1)));
-y2wr=values(lugar1,2)
+y2wr=values(lugar1,2);
 t2wr=values(lugar1,1);
 [val lugar2] =min(abs(3*t1+ret-values(:,1)));
-y3wr=values(lugar2,2)
+y3wr=values(lugar2,2);
 t3wr=values(lugar2,1);
 
 figure(1);subplot(4,1,1)
@@ -66,15 +64,8 @@ hold on;
 plot([t1wr t2wr t3wr],[y1wr, y2wr, y3wr],'+');hold on;
 
 % 2) Cálculo de ganancia en estado estacionario
-K_wr = 7.624/V;     % ganancia en ess
-
-% 3) Normalización de valores de la señal
-% Se dividen los valores obtenidos del gráfico por el valor de la entrada
-% dado que con el método se busca la respuesta del sistema a una entrada
-% escalón unitario
-% y1wr = y1wr/V;
-% y2wr = y2wr/V;
-% y3wr = y3wr/V;
+Wrss = 7.624;
+K_wr = Wrss/V;     % ganancia en ess
 
 % 4) Aplicación del método
 % 4.a) Se define ki = y(ti)/K - 1 para cada ecuación resultante de los 3
@@ -95,13 +86,12 @@ T2wr = -(t1)/log(alfa2wr);              % Chen ec.25
 T3wr = 0; % No tiene cero la velocidad respecto de omega
 
 % 4.4) Definición de la función de transferencia obtenida con el método
-Gwr = tf(K_wr*[T3wr 1],conv([T1wr 1],[T2wr 1]))
+Gwr = tf(K_wr,conv([T1wr 1],[T2wr 1]));
 
 % 5) Gráfica de los resultado obtenidos
 % Se compara la señal dada por los datos de la hoja de cálculo con la
 % salida del sistema al hacer uso de la FT obtenida con el método de Chen
 [y_Gwr, t_Gwr] = lsim(Gwr, Vin, tt);
-
  
 % 1) Elección de valores sobre el plot de Wr/TL
 ret = 0.7;
@@ -123,25 +113,25 @@ TL=.12; % TL:Amplitud del escalon de Torque de entrada
 
 % 2) Cálculo de ganancia en estado estacionario
 
-w_001=7.635; %Omega en estado estacionario SIN TL
-w_002=3.656; %Omega en estado estacionario CON TL
-k_tl= -(w_002-w_001)/TL; % ganancia en ess %Debes considerar que pasa de un valor a otro
+w_001=7.635; % Omega en estado estacionario SIN TL
+w_002=3.656; % Omega en estado estacionario CON TL
+k_tl= -(w_002-w_001)/TL; % ganancia en ess, debemos considerar que pasa de un valor a otro
 
 % 3) Normalización de valores de la señal
 % Se dividen los valores obtenidos del gráfico por el valor de la entrada
 % dado que con el método se busca la respuesta del sistema a una entrada
 % escalón unitario
-yid_1=-(y1w-w_001);
-yid_2=-(y2w-w_001);
-yid_3=-(y3w-w_001);
+yid_1 = -(y1w-w_001);
+yid_2 = -(y2w-w_001);
+yid_3 = -(y3w-w_001);
 
 % 4) Aplicación del método
 % A) Se define ki = y(ti)/K - 1 para cada ecuación resultante de los 3,
 % teniendo en cuenta el TL
 
-k1w      =      (1/TL)*yid_1/k_tl-1;
-k2w      =   (1/TL)*yid_2/k_tl-1;
-k3w      =     (1/TL)*yid_3/k_tl-1;
+k1w = (1/TL)*yid_1/k_tl-1;
+k2w = (1/TL)*yid_2/k_tl-1;
+k3w = (1/TL)*yid_3/k_tl-1;
 
 % B) Se despejan los valores de alfa1, alfa2 y beta
 bwr     = 4*(k1w^3)*k3w - 3*(k1w^2)*(k2w^2) - 4*(k2w^3) + (k3w^2) + 6*k1w*k2w*k3w;
@@ -153,18 +143,15 @@ betaw  = (k1w+alfa2w)/(alfa1w-alfa2w);                                          
 % t_init_Wr = 0.101;
 T1w = real(-(t1)/log(alfa1w));                    % Ec. de Chen 25   
 T2w = real(-(t1)/log(alfa2w));                    % Ec. de Chen 25    
-T3w = real((betaw*(T1w - T2w)) + T1w);            % Ec. de Chen 25
+T3wr = real((betaw*(T1w - T2w)) + T1w);            % Ec. de Chen 25
 
 % D) Definición de la función de transferencia obtenida con el método
-Gw = tf(k_tl*[T3w 1],conv([T1wr 1],[T2wr 1])); % Mismos polos de wr/Va
+Gw = tf(k_tl*[T3wr 1],conv([T1wr 1],[T2wr 1])); % Mismos polos de wr/Va
 
 % 5) Gráfica de los resultado obtenidos
 % Se compara la señal dada por los datos de la hoja de excel con la
 % salida del sistema al hacer uso de la FT obtenida con el método de Chen
 [y_Gw,t_Gw] = lsim(Gw,TL_,tt);
-
-% MÉTODO DE CHEN
-% G(s) = Wr(s)/U(s)
 
 % figure(2)
 figure(1)
@@ -180,14 +167,15 @@ grid on;
 % break
 K1_C=K_wr;K2_C=k_tl;
 
-% CÁLCULO DE LOS PARÁMETROS DEL MOTOR A PARTIR DE G_ia
-Ra = 2/0.82 % Volt/Imax
+% CÁLCULO DE LOS PARÁMETROS DEL MOTOR A PARTIR DE G_wr
+Imax = 0.82;
+Ra = 2/Imax; % Volt/Imax
 Bm=0;
-La=Ra*T1wr*T2wr/(T1wr+T2wr)
-Ki=K1_C*Ra/K2_C
-J=(T1wr+T2wr)/K2_C
-Km=1/K1_C
-%Bm=J*La/(Ra*T1wr*T2wr) - Ki*Km/Ra %debe verificar nulo
+La=Ra*T1wr*T2wr/(T1wr+T2wr);
+Ki=K1_C*Ra/K2_C;
+J=(T1wr+T2wr)/K2_C;
+Km=1/K1_C;
+
 % % SIMULACIÓN DEL FUNCIONAMIENTO DEL MOTOR A PARTIR DE LOS PARÁMETROS 
 % % OBTENIDOS
 % 
@@ -198,18 +186,18 @@ Km=1/K1_C
  C = [0 1 0];                               
  D = [0 0];
 % 
-  ia      = zeros(1, length(tt)); 
-  wr      = zeros(1, length(tt));
- theta   = zeros(1, length(tt));
+ia      = zeros(1, length(tt)); 
+wr      = zeros(1, length(tt));
+theta   = zeros(1, length(tt));
 
 % 
 % % Condiciones iniciales
- Xop      = [0 0 0]';
- wr(1)    = 0;
- ia(1)    = 0;
- theta(1) = 0;
+Xop      = [0 0 0]';
+wr(1)    = 0;
+ia(1)    = 0;
+theta(1) = 0;
 % 
- x = [ia(1) wr(1) theta(1)]';
+x = [ia(1) wr(1) theta(1)]';
 % 
 % %%
 % % SIMULACIÓN
