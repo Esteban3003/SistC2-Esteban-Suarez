@@ -92,12 +92,10 @@ betawr  = (k1wr + alfa2wr)/(alfa1wr - alfa2wr);                   % Chen ec.20
 % 4.c) Cálculo de las constantes de tiempo de la FT
 T1wr = -(t1)/log(alfa1wr);              % Chen ec.25         
 T2wr = -(t1)/log(alfa2wr);              % Chen ec.25         
-T3wr = (betawr*(T1wr - T2wr)) + T1wr;   % Chen ec.25
-T3wr=0; %No tiene cero la velocidad respecto de omega
-% T3w = real((bwr*(T1wr - T2wr)) + T1wr);            % Ec. de Chen 25
+T3wr = 0; % No tiene cero la velocidad respecto de omega
 
 % 4.4) Definición de la función de transferencia obtenida con el método
-Gwr = tf(K_wr*[T3wr 1],conv([T1wr 1],[T2wr 1]));
+Gwr = tf(K_wr*[T3wr 1],conv([T1wr 1],[T2wr 1]))
 
 % 5) Gráfica de los resultado obtenidos
 % Se compara la señal dada por los datos de la hoja de cálculo con la
