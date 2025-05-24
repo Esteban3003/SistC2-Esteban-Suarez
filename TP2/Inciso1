@@ -33,13 +33,13 @@ deltaT = Datos(2,1);
 delayT = Datos(102,1);
 
 %%
-%%MODELADO DEL MOTOR LAZO ABIERTO (Contínuo)
+%%MODELADO DEL MOTOR LAZO ABIERTO (Continuo)
 %Parámetros del motor obtenidos anteriormente con el método de CHEN
 Ki = 0.2804; J = 0.0031; Bm = 0; Laa = 0.0217; Ra = 2.4390; Km = 0.2623;
 
 A_c = [-Ra/Laa -Km/Laa 0;     %x1: Corriente
         Ki/J  -Bm/J    0;     %x2: Velocidad Angular
-        0       1      0]     %x3: Angulo
+        0       1      0]     %x3: Ángulo
 
 B_c = [1/Laa 0;
         0 -1/J;
@@ -51,7 +51,7 @@ D_c = [0 0]
 
 G = ss(A_c, B_c, C_c, D_c)
 
-%Determinación del los tiempos de la dinámica del sistema continuo
+%Determinación de los tiempos de la dinámica del sistema continuo
 root_c = eig(A_c)
 tR = log(0.95)/ real(root_c(3))
 tL = log(0.05)/ real(root_c(2))
@@ -68,7 +68,7 @@ C_d = G_d.c
 D_d = G_d.d
 
 %%
-%Prueba de Controlabilidad - Alcanzabilidad
+%Prueba de Controlabilidad - Alcanzabilidad, ambos valores de rank() deberían ser iguales
 Ma = [B_d  A_d*B_d  A_d^2*B_d];
 rank(Ma)
 Mc = [B_d  A_d*B_d  A_d^2*B_d A_d^3];
