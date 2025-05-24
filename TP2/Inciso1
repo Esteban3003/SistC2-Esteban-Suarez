@@ -163,7 +163,7 @@ end
 %%
 %GRÁFICAS
 
-figure(2);
+figure(1);
 subplot(3,2,1);hold on;
 plot(t ,Theta,t,Ref); title('Ángulo  \phi [rad]'); grid on; hold on;
 subplot(3,2,2);hold on;
@@ -175,5 +175,5 @@ plot(t ,u); title('Acción de control  V [V]');grid on;hold on;
 subplot(3,1,3);hold on;
 plot(t ,Tl);title('Torque  TL [N/m]');grid on;hold on;
 
-figure(3)
+figure(2)
 plot(Theta ,Wr); title('Plano de Fases'); grid on;hold on;
