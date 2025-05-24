@@ -99,9 +99,9 @@ Bo = C_d'
 Co = B_d'
 
 %LQR OBSERVADOR
-d_o = [.01 .001 .1];                        %Corriente, velocidad, Ángulo
+d_o = [.01 1000000 .1];                        %Corriente, velocidad, Ángulo
 Q_o = diag(d_o);                            %Matriz de covarianza del ruido del proceso (incertidumbre de variables -> Valores elevados)
-R_o = 0.05                                   %Matriz de covarianza del ruido de la medición (incertidumbre en las mediciones -> Valores elevados)
+R_o = 0.005                                   %Matriz de covarianza del ruido de la medición (incertidumbre en las mediciones -> Valores elevados)
 K_o = (dlqr(Ao,Bo,Q_o,R_o))'
 
 %%
