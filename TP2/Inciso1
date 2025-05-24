@@ -1,7 +1,7 @@
 %% Sistemas de Control II -FCEFyN-UNC 
-% Profesor: Dr.Ing. Pucheta, Julian
+% Profesor: Dr. Ing. Pucheta, Julian
 % Alumno: Suarez, Esteban Samuel
-% Tp N° 2 - ITEM 1 - 
+% TP N° 2 - ITEM 1 - 
 %
 %   Implementar un sistema en variables de estado que controle el ángulo del motor, para 
 %   consignas de pi/2 y –pi/2 cambiando cada 5 segundos y que el TL es el descripto en la planilla de datos 
