@@ -108,7 +108,7 @@ K_o = (dlqr(Ao,Bo,Q_o,R_o))'
 Tf = 10;                             %Tiempo final para la simulación
 Ti = Tm                              %Tiempo de Integración
 N = floor(Tf/Ti)                     %Numero de pasos para la simulación
-dead_zone = 0.5;                     %Zona muerta del Actuador
+dead_zone = 1;                     %Zona muerta del Actuador
 
 t = 0:Ti:N*Ti;
 Wr = zeros(1, N+1);
