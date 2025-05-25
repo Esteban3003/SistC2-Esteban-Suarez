@@ -34,8 +34,8 @@ delayT = Datos(102,1);
 
 %%
 %%MODELADO DEL MOTOR LAZO ABIERTO (Contínuo)
-%Parámetros del motor reales
-Ki = 0.25; J = 0.00233; Bm = 0.00131; Laa = 0.0047; Ra = 2.27; Km = 0.25;
+%Parámetros del motor obtenidos anteriormente con el método de Chen
+Ki = 0.2804; J = 0.0031; Bm = 0; Laa = 0.0217; Ra = 2.4390; Km = 0.2623;
 
 A_c = [-Ra/Laa -Km/Laa 0;     %x1: Corriente
         Ki/J  -Bm/J    0;     %x2: Velocidad Angular
@@ -83,9 +83,9 @@ BA = [B_d ; -C_d(1,:)*B_d]
 %Se dimensiona a prueba y error
 %Ponderaciones mayores -> Se penalizará más el mismo (Indica un elevado costo)
 
-d_c = [9000 900 0.004 0.3];        %Corriente, velocidad , Ángulo, psita
+d_c = [5000 900 0.004 0.3];        %Corriente, velocidad , Ángulo, psita
 Q_c = diag(d_c);                           %Q actua sobre las VARIABLES DE ESTADO
-R_c = 0.001;                                 %R actua sobre la ACCION DE CONTROL
+R_c = .001;                                 %R actua sobre la ACCION DE CONTROL
 
 % Cálculo del controlador
 KLQR_C = dlqr(AA, BA, Q_c, R_c);
@@ -130,6 +130,7 @@ x = [Ia(1) Wr(1) Theta(1)]';
 x_obs = [0 0 0]';
 psita = 0;
 
+Ki = 0.25; J = 0.00233; Bm = 0.00131; Laa = 0.0047; Ra = 2.27; Km = 0.25;
 for i=1: N
     
     y = C_d*x;
