@@ -83,7 +83,7 @@ BA = [B_d ; -C_d(1,:)*B_d]
 %Se dimensiona a prueba y error
 %Ponderaciones mayores -> Se penalizará más el mismo (Indica un elevado costo)
 
-d_c = [5000 900 0.004 0.3];        %Corriente, velocidad , Ángulo, psita
+d_c = [9000 900 0.004 0.3];        %Corriente, velocidad , Ángulo, psita
 Q_c = diag(d_c);                           %Q actua sobre las VARIABLES DE ESTADO
 R_c = .001;                                 %R actua sobre la ACCION DE CONTROL
 
