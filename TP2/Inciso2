@@ -109,6 +109,7 @@ Tf = 10;                                 %Tiempo final para la simulación
 Ti = Tm                                 %Tiempo de Integración
 N = floor(Tf/Ti)                        %Numero de pasos para la simulación
 dead_zone = .5;                         %Zona muerta del Actuador
+% dead_zone = 100;                        %Zona muerta máxima del Actuador
 
 t = 0:Ti:N*Ti;
 Wr = zeros(1, N+1);
