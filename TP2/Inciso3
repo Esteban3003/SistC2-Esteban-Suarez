@@ -129,7 +129,7 @@ Ko2 = (dlqr(Ao2 ,Bo2 ,Qo2 ,Ro2))';
 
 %%
 %SIMULACIÓN
-Tf = 20;                %Tiempo Final de la simulación
+Tf = 40;                %Tiempo Final de la simulación
 %Ti = 1e-4;              %Tiempo de Integración Euler
 Ti = Tm/20
 N = ceil(Tf/Ti)         %Número de puntos a simular
